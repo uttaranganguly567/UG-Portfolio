@@ -206,12 +206,22 @@ st.markdown("""
         h1.hero-title {
             font-size: 3.8rem;
             font-family: var(--display-font);
+            font-variation-settings: "wdth" 95, "wght" 520;
+            letter-spacing: 0.08em;
+            color: #ffffff;
+        }
+
+        .hero-title .hero-first {
+            color: #ffffff;
+        }
+
+        .hero-title .hero-last {
+            color: #1fb2ff;
             background: linear-gradient(120deg, rgba(0,212,255,0.95), rgba(0,120,255,0.75));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: sheen 14s linear infinite;
-            font-variation-settings: "wdth" 95, "wght" 520;
-            letter-spacing: 0.08em;
+            display: inline-block;
         }
 
         .hero-subtitle {

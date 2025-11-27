@@ -6,7 +6,10 @@ def show():
     st.markdown("""
         <div style='text-align: center; padding: 2.5rem 0;'>
             <span class='home-pill'>✨ Information Technology · B.Tech (4th Year)</span>
-            <h1 class='hero-title' style='margin: 1.5rem 0 0;'>Uttaran Ganguly</h1>
+            <h1 class='hero-title' style='margin: 1.5rem 0 0;'>
+                <span class='hero-first'>Uttaran</span>
+                <span class='hero-last'>Ganguly</span>
+            </h1>
             <p class='hero-subtitle' style='margin-top: 0.75rem;'>
                 Building intuitive digital experiences with code and curiosity
             </p>
@@ -19,12 +22,10 @@ def show():
     
     with col1:
         st.markdown("### 👋 Welcome")
-        st.markdown("""
-            <div class='intro-text'>
-                I'm a 4th year B.Tech student in Information Technology at 
-                <strong>St. Thomas' College of Engineering and Technology, Kolkata</strong>.
-            </div>
-        """, unsafe_allow_html=True)
+        st.info(
+            "I'm a 4th year B.Tech student in Information Technology at "
+            "**St. Thomas' College of Engineering and Technology, Kolkata**."
+        )
     
     with col2:
         st.markdown("### 🎓 Education")
