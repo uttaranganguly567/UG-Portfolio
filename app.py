@@ -13,7 +13,7 @@ st.set_page_config(
     page_title="Uttaran Ganguly | Portfolio",
     page_icon="👨‍💻",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # Custom CSS for dark theme and modern styling
@@ -76,123 +76,114 @@ st.markdown("""
         }
 
         [data-testid="stSidebar"] {
-            background-color: #1f1f1f;
-            font-family: var(--body-font);
-            padding: 0;
-            min-height: 100vh;
+            display: none;
         }
 
-        [data-testid="stSidebar"] > div:first-child {
-            background-color: #1f1f1f;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+        [data-testid="collapsedControl"] {
+            display: none !important;
         }
 
-        [data-testid="stSidebar"] section[data-testid="stSidebarContent"] {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            padding: 0;
+        .nav-container-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            padding: 0 0 2.4rem;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
         }
 
-        [data-testid="stSidebar"] section[data-testid="stSidebarContent"] > div {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: stretch;
-            align-items: stretch;
-            padding: 1.6rem 1.1rem 1.6rem 1.1rem;
-            box-sizing: border-box;
-        }
-
-        [data-testid="stSidebar"] h1,
-        [data-testid="stSidebar"] h2,
-        [data-testid="stSidebar"] h3 {
-            font-family: var(--accent-font);
-            letter-spacing: 0.08em;
-        }
-
-        [data-testid="stSidebar"] div[data-testid="stRadio"] {
-            width: 100%;
-            height: 100%;
+        .nav-container {
+            width: min(900px, 90%);
+            margin: 0 auto;
+            padding: 1.2rem 1.6rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.16), rgba(0,120,200,0.12));
+            box-shadow: 0 22px 42px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0,212,255,0.25);
+            backdrop-filter: blur(24px);
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div {
+        .nav-menu {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 230px;
-            align-items: stretch;
-            height: 100%;
-            gap: 1.2rem;
-            padding: 0.3rem 0;
+            justify-content: center;
+            align-items: center;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            margin: 0;
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label {
-            display: flex;
+        .nav-button {
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            width: 100% !important;
-            flex: 1;
-            box-sizing: border-box;
-            padding: 1rem 1.45rem 1rem 2.4rem;
-            margin: 0;
+            padding: 0.95rem 1.85rem;
             border-radius: 14px;
             border: 1px solid rgba(0,212,255,0.25);
-            background: linear-gradient(135deg, rgba(0,212,255,0.18), rgba(0,212,255,0.02));
+            background: linear-gradient(135deg, rgba(0,212,255,0.18), rgba(0,212,255,0.05));
             font-family: 'Science Gothic', var(--display-font);
             font-variation-settings: "wdth" 92, "wght" 520;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.11em;
             text-transform: uppercase;
             color: var(--text-color);
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(0,212,255,0.18);
+            white-space: nowrap;
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label::before {
+        .nav-button::before {
             content: "";
+            display: inline-block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: rgba(0,212,255,0.6);
             box-shadow: 0 0 8px rgba(0,212,255,0.4);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            position: absolute;
-            left: 1.35rem;
+            transition: transform 0.3s ease;
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label:hover {
-            transform: translateX(6px);
-            box-shadow: 0 12px 24px rgba(0, 212, 255, 0.2);
-            border-color: rgba(0,212,255,0.5);
+        .nav-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 212, 255, 0.24);
+            border-color: rgba(0,212,255,0.45);
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label:has(input:checked) {
-            background: linear-gradient(135deg, rgba(0,212,255,0.35), rgba(0,120,200,0.35));
+        .nav-button.active {
+            background: linear-gradient(135deg, rgba(0,212,255,0.38), rgba(0,120,200,0.35));
             border-color: rgba(0,212,255,0.7);
-            box-shadow: 0 15px 28px rgba(0, 212, 255, 0.25);
+            box-shadow: 0 18px 34px rgba(0, 212, 255, 0.28);
+            color: #04151f;
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label:has(input:checked)::before {
-            transform: scale(1.3);
+        .nav-button.active::before {
+            transform: scale(1.35);
         }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label > div:first-child {
-            display: none;
-        }
+        @media (max-width: 768px) {
+            .nav-container-wrapper {
+                padding: 0 0 2rem;
+            }
 
-        [data-testid="stSidebar"] div[data-testid="stRadio"] > div > label > div:last-child {
-            width: 100%;
-            font-family: 'Science Gothic', var(--display-font);
-            letter-spacing: 0.1em;
-            white-space: nowrap;
+            .nav-container {
+                width: 92%;
+                padding: 0.9rem 1.1rem;
+            }
+
+            .nav-menu {
+                gap: 0.75rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         h1, h2 {
@@ -470,22 +461,38 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-# Sidebar navigation with modern styling
+# Top navigation bar
+nav_options = ["Home", "Projects", "Skills", "Contact"]
+
 if "current_page" not in st.session_state:
     st.session_state.current_page = "Home"
 
-nav_options = ["Home", "Projects", "Skills", "Contact"]
-default_index = nav_options.index(st.session_state.current_page) if st.session_state.current_page in nav_options else 0
+params = st.query_params
+requested_page = params.get("page", st.session_state.current_page)
+if isinstance(requested_page, list):
+    requested_page = requested_page[0] if requested_page else st.session_state.current_page
 
-nav_selection = st.sidebar.radio(
-    "Go to page",
-    nav_options,
-    index=default_index,
-    label_visibility="collapsed",
-    key="navigation_radio"
-)
+if requested_page not in nav_options:
+    requested_page = "Home"
 
-st.session_state.current_page = nav_selection
+if st.session_state.current_page != requested_page:
+    st.session_state.current_page = requested_page
+
+current_param_page = params.get("page")
+if isinstance(current_param_page, list):
+    current_param_page = current_param_page[0] if current_param_page else None
+
+if current_param_page != st.session_state.current_page:
+    st.query_params["page"] = st.session_state.current_page
+
+nav_html = "<div class='nav-container-wrapper'><div class='nav-container'><div class='nav-menu'>"
+for option in nav_options:
+    active_class = " active" if st.session_state.current_page == option else ""
+    nav_html += f"<a class='nav-button{active_class}' href='?page={option}'>{option}</a>"
+nav_html += "</div></div></div>"
+
+st.markdown(nav_html, unsafe_allow_html=True)
+
 page = st.session_state.current_page
 
 # Route to the selected page
