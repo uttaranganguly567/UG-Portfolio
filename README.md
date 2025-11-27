@@ -60,7 +60,7 @@ Student/
 
 1. **Navigate to the project directory:**
    ```bash
-   cd "c:\Users\Dell\Documents\Coding\Projects\Portfolio Websites\Student"
+   cd "project\directory\path"
    ```
 
 2. **Create a virtual environment (optional but recommended):**
