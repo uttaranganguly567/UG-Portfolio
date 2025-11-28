@@ -482,10 +482,21 @@ st.markdown("""
 # Top navigation bar
 nav_options = ["Home", "Projects", "Skills", "Contact"]
 
+if hasattr(st, "query_params"):
+    params = dict(st.query_params)
+
+    def _set_query_params(**kwargs) -> None:
+        for key, value in kwargs.items():
+            st.query_params[key] = value
+else:
+    params = st.experimental_get_query_params()
+
+    def _set_query_params(**kwargs) -> None:
+        st.experimental_set_query_params(**kwargs)
+
 if "current_page" not in st.session_state:
     st.session_state.current_page = "Home"
 
-params = st.query_params
 requested_page = params.get("page", st.session_state.current_page)
 if isinstance(requested_page, list):
     requested_page = requested_page[0] if requested_page else st.session_state.current_page
@@ -501,7 +512,7 @@ if isinstance(current_param_page, list):
     current_param_page = current_param_page[0] if current_param_page else None
 
 if current_param_page != st.session_state.current_page:
-    st.query_params["page"] = st.session_state.current_page
+    _set_query_params(page=st.session_state.current_page)
 
 nav_html = "<div class='nav-container-wrapper'><div class='nav-container'><div class='nav-menu'>"
 for option in nav_options:
