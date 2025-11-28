@@ -506,7 +506,10 @@ if current_param_page != st.session_state.current_page:
 nav_html = "<div class='nav-container-wrapper'><div class='nav-container'><div class='nav-menu'>"
 for option in nav_options:
     active_class = " active" if st.session_state.current_page == option else ""
-    nav_html += f"<a class='nav-button{active_class}' href='?page={option}'>{option}</a>"
+    nav_html += (
+        f"<a class='nav-button{active_class}' href='?page={option}' target='_self' "
+        f"rel='noopener noreferrer'>{option}</a>"
+    )
 nav_html += "</div></div></div>"
 
 st.markdown(nav_html, unsafe_allow_html=True)
