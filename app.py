@@ -2,11 +2,12 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 import streamlit as st
-from portfolio_pages import home, projects, skills, contact
 
 # Load environment variables from .env located alongside this script (if present)
 _env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=_env_path, override=False)
+
+from portfolio_pages import home, projects, skills, contact
 
 # Page configuration
 st.set_page_config(
@@ -211,16 +212,23 @@ st.markdown("""
             color: #ffffff;
         }
 
-        .hero-title .hero-first {
-            color: #ffffff;
-        }
-
-        .hero-title .hero-last {
-            color: #1fb2ff;
-            background: linear-gradient(120deg, rgba(0,212,255,0.95), rgba(0,120,255,0.75));
+        .hero-title .hero-gradient {
+            background: linear-gradient(
+                120deg,
+                #ffffff 0%,
+                #eef5ff 15%,
+                #b7dbff 30%,
+                #66b0ff 45%,
+                #1f66c5 55%,
+                #66b0ff 70%,
+                #b7dbff 85%,
+                #ffffff 100%
+            );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: sheen 14s linear infinite;
+            color: #ffffff;
+            background-size: 200% 100%;
+            animation: sheen 20s linear infinite;
             display: inline-block;
         }
 

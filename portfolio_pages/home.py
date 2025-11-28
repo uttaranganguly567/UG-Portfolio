@@ -6,10 +6,7 @@ def show():
     st.markdown("""
         <div style='text-align: center; padding: 2.5rem 0;'>
             <span class='home-pill'>✨ Information Technology · B.Tech (4th Year)</span>
-            <h1 class='hero-title' style='margin: 1.5rem 0 0;'>
-                <span class='hero-first'>Uttaran</span>
-                <span class='hero-last'>Ganguly</span>
-            </h1>
+            <h1 class='hero-title' style='margin: 1.5rem 0 0;'><span class='hero-gradient'>Uttaran Ganguly</span></h1>
             <p class='hero-subtitle' style='margin-top: 0.75rem;'>
                 Building intuitive digital experiences with code and curiosity
             </p>
@@ -23,16 +20,13 @@ def show():
     with col1:
         st.markdown("### 👋 Welcome")
         st.info(
-            "I'm a 4th year B.Tech student in Information Technology at "
-            "**St. Thomas' College of Engineering and Technology, Kolkata**."
+            "Hi, I’m Uttaran Ganguly."
         )
     
     with col2:
         st.markdown("### 🎓 Education")
         st.info(
-            "**St. Thomas' College of Engineering and Technology, Kolkata**\n\n"
-            "B.Tech in Information Technology (4th Year)\n\n"
-            "Expected Graduation: 2025"
+            "IT Undergrad at STCET, Kolkata (2022 - Present)."
         )
     
     st.markdown("---")
@@ -44,7 +38,7 @@ def show():
         st.markdown("""
             <div class='project-card home-highlight' style='text-align: center;'>
                 <h4>💻 Development</h4>
-                <p>Building full-stack web applications with modern frameworks</p>
+                <p>Build. Refine. Ship.</p>
             </div>
         """, unsafe_allow_html=True)
     
@@ -52,7 +46,7 @@ def show():
         st.markdown("""
             <div class='project-card home-highlight' style='text-align: center;'>
                 <h4>📊 Data Science</h4>
-                <p>Analyzing data and building predictive models</p>
+                <p>Learn. Model. Predict.</p>
             </div>
         """, unsafe_allow_html=True)
     
@@ -60,7 +54,7 @@ def show():
         st.markdown("""
             <div class='project-card home-highlight' style='text-align: center;'>
                 <h4>🔧 Problem Solving</h4>
-                <p>Writing clean, efficient code and debugging complex issues</p>
+                <p>Think. Plan. Solve.</p>
             </div>
         """, unsafe_allow_html=True)
     

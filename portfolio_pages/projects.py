@@ -11,14 +11,14 @@ def show():
     st.markdown("""
         <div class='project-card'>
             <h3>Campus Core</h3>
-            <p>A comprehensive campus management system designed to streamline student and faculty interactions.</p>
-            <p><strong>Tech Stack:</strong> Full-Stack Web Application</p>
+            <p>Records made easy.</p>
+            <p><strong>Tech Stack:</strong> Built with React on the front, Node and Express on the back, and MongoDB Atlas for data.</p>
         </div>
     """, unsafe_allow_html=True)
     
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.markdown("**Project Description:**\nA platform for managing campus activities, events, and communications.")
+        st.markdown("**Project Description:**\nA student information system built by our team that lets students and staff manage records, track data and handle tasks in a simple interface. React powered the frontend, Node and Express handled the backend, and MongoDB Atlas stored all data with JWT securing user access.")
     with col2:
         st.markdown("<a class='project-link' href='https://campus-core.onrender.com/login' target='_blank' rel='noopener noreferrer'>Visit Project</a>", unsafe_allow_html=True)
     
@@ -28,8 +28,8 @@ def show():
     st.markdown("""
         <div class='project-card'>
             <h3>GoldFilmDB</h3>
-            <p>A movie database application that allows users to browse, search, and explore film information.</p>
-            <p><strong>Tech Stack:</strong> Full-Stack Web Application (Microservices)</p>
+            <p>Movies, clear view.</p>
+            <p><strong>Tech Stack:</strong> Runs on Spring Boot with MongoDB Atlas, and a React frontend served through Docker on Render.</p>
         </div>
     """, unsafe_allow_html=True)
     
@@ -38,8 +38,7 @@ def show():
         st.markdown("""
             **Project Description:**
             
-            A distributed movie database with separate frontend and backend services. 
-            The application showcases microservices architecture with independent scaling capabilities.
+            A movie platform that lets users browse films, check trailers and share ratings. It uses a Spring Boot backend with MongoDB Atlas and a React frontend, shipped through Docker and deployed on Render.
             
             ⚠️ **Note:** This application may take time to load on first access because the backend 
             and frontend run as separate services on free hosting and may need to spin up.
