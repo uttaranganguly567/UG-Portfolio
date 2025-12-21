@@ -48,5 +48,17 @@ def show():
     
     st.markdown("---")
     
-    st.markdown("### 📋 More Projects Coming Soon")
-    st.info("I'm constantly working on new projects. Check back soon for more updates!")
+    st.markdown("""
+        <div style="margin-top: 1.5rem; margin-bottom: 0.75rem;">
+            <h3 style="margin: 0; color: #f5f5f5; font-size: 1.35rem; letter-spacing: 0.02em; display: flex; align-items: center; gap: 0.5rem;">
+                <span>📋</span>
+                <span>More Projects Coming Soon</span>
+            </h3>
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div style="background: #12324a; border: 1px solid rgba(0,212,255,0.35); border-radius: 12px; padding: 0.9rem 1.1rem; color: #e6f2ff; font-size: 0.98rem; line-height: 1.55;">
+            I'm constantly working on new projects. Check back soon for more updates!
+        </div>
+    """, unsafe_allow_html=True)

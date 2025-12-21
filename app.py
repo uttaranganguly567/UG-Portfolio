@@ -76,6 +76,12 @@ st.markdown("""
             background-color: #1a1a1a;
         }
 
+        /* Constrain page width and add breathable padding across devices */
+        .main .block-container {
+            padding: clamp(0.75rem, 1.8vw, 2.5rem) clamp(0.9rem, 3vw, 3rem) 3rem;
+            max-width: 1100px;
+        }
+
         [data-testid="stSidebar"] {
             display: none;
         }
@@ -139,6 +145,13 @@ st.markdown("""
             white-space: nowrap;
         }
 
+        /* Form controls fill available width on narrow screens */
+        .stTextInput input,
+        .stTextArea textarea,
+        .stSelectbox select {
+            width: 100%;
+        }
+
         .nav-button::before {
             content: "";
             display: inline-block;
@@ -169,21 +182,93 @@ st.markdown("""
 
         @media (max-width: 768px) {
             .nav-container-wrapper {
-                padding: 0 0 2rem;
+                padding: 0 0 1.2rem;
             }
 
             .nav-container {
-                width: 92%;
-                padding: 0.9rem 1.1rem;
+                width: 100%;
+                padding: 0.75rem 0.9rem;
+                border-radius: 18px;
+                background: rgba(0, 212, 255, 0.08);
+                border: 1px solid rgba(0, 212, 255, 0.25);
+                box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
             }
 
             .nav-menu {
-                gap: 0.75rem;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.55rem;
             }
 
             .nav-button {
                 width: 100%;
                 justify-content: center;
+                white-space: normal;
+                padding: 0.9rem 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .nav-container::before,
+            .nav-container::after {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.6rem;
+                line-height: 1.1;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skill-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+
+            .project-card {
+                padding: 1.35rem;
+            }
+
+            [data-testid="column"] {
+                gap: 0.75rem;
+            }
+
+            .stForm form {
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .hero-title {
+                font-size: 2.15rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                letter-spacing: 0.08em;
+            }
+
+            .project-link, .nav-button {
+                padding: 0.9rem 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .main .block-container {
+                padding-inline: 1rem;
+            }
+
+            .nav-container {
+                padding: 0.65rem 0.85rem;
             }
         }
 
@@ -267,6 +352,11 @@ st.markdown("""
             letter-spacing: 0.1em;
             font-variation-settings: "wdth" 90, "wght" 520;
             text-transform: uppercase;
+        }
+
+        /* Center-align any inline h3 injected via markdown blocks on mobile */
+        h3 {
+            text-align: center;
         }
 
         .section-title::after {

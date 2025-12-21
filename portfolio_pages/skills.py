@@ -14,9 +14,18 @@ def show():
         "Data Science & ML": ["Numpy", "Pandas", "Scikit Learn"]
     }
     
-    # Display skills by category
+    # Display skills by category (centered headings for mobile)
     for category, skills_list in skills_data.items():
-        st.markdown(f"### {category}")
+        st.markdown(
+            f"""
+            <div style='text-align: center; margin: 0.5rem 0 0.65rem;'>
+                <h3 style='margin: 0; letter-spacing: 0.06em; text-transform: uppercase; font-size: 1.2rem;'>
+                    {category}
+                </h3>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         
         # Create grid layout for skills
         cols = st.columns(len(skills_list) if len(skills_list) <= 3 else 3)
@@ -33,8 +42,15 @@ def show():
         st.markdown("")  # Add spacing between categories
     
     st.markdown("---")
-    
-    st.markdown("### 📚 Learning & Development")
+
+    st.markdown(
+        """
+        <h3 style='text-align: center; margin: 0.25rem 0 1rem; font-size: 1.2rem; letter-spacing: 0.04em;'>
+            📚 Learning & Development
+        </h3>
+        """,
+        unsafe_allow_html=True,
+    )
     
     # Create 3 equal columns for proper alignment
     learning_cols = st.columns(3)

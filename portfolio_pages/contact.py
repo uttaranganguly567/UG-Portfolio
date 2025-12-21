@@ -64,7 +64,15 @@ def _send_contact_email(name: str, email: str, subject: str, message: str) -> tu
 def show():
     """Contact page of the portfolio"""
     
-    st.markdown("<h1 class='section-title'>📬 Get In Touch</h1>", unsafe_allow_html=True)
+    # Smaller heading so it fits on one line on mobile
+    st.markdown(
+        """
+        <h1 class='section-title' style='font-size: 1.8rem; letter-spacing: 0.08em;'>
+            📬 Get In Touch
+        </h1>
+        """,
+        unsafe_allow_html=True,
+    )
     
     st.markdown("---")
     
