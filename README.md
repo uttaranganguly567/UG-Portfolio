@@ -1,182 +1,69 @@
-# Uttaran Ganguly's Portfolio Website
+# Uttaran Ganguly — AI & Systems Engineer Portfolio (v2.0)
 
-A modern, dark-themed portfolio website built with **Streamlit**. Clean design, easy navigation, and fully customizable.
+A high-performance, dark cybernetic portfolio website for **Uttaran Ganguly** — AI Systems Engineer, Full-Stack Developer, and Founder of **LightShift Studio**.
 
-## 📁 Project Structure
-
-```
-Student/
-├── app.py                 # Main application file (entry point)
-├── requirements.txt       # Python dependencies
-├── README.md             # This file
-└── portfolio_pages/
-   ├── __init__.py       # Pages module
-   ├── home.py           # Home page
-   ├── projects.py       # Projects page
-   ├── skills.py         # Skills page
-   └── contact.py        # Contact page
-```
-
-## 🎨 Features
-
-- **Dark Theme**: Clean, modern dark interface with cyan accents
-- **Responsive Layout**: Works seamlessly on desktop and mobile
-- **Sidebar Navigation**: Easy page switching
-- **Modular Structure**: Each page is a separate module for easy maintenance
-- **Modern Typography**: Professional fonts with smooth spacing
-- **Interactive Elements**: Hover effects on cards and smooth transitions
-
-## 📄 Pages
-
-### 🏠 Home
-- Welcome message with introduction
-- Educational background
-- Quick overview of what you do
-
-### 🚀 Projects
-- **Campus Core**: Campus management system
-- **GoldFilmDB**: Movie database with microservices architecture
-- Links to live projects
-
-### 🛠️ Skills
-- **Programming Languages**: Java, Python, C
-- **Databases**: SQL
-- **Data Science & ML**: Numpy, Pandas, Scikit Learn
-- Grid layout for easy scanning
-
-### 📬 Contact
-- Email contact: uttaranganguly20@gmail.com
-- GitHub: https://github.com/uttaranganguly567
-- LinkedIn: https://www.linkedin.com/in/uttaran-ganguly/
-- Contact form for direct messages
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-
-### Installation
-
-1. **Navigate to the project directory:**
-   ```bash
-   cd "project\directory\path"
-   ```
-
-2. **Create a virtual environment (optional but recommended):**
-   ```bash
-   python -m venv venv
-   ```
-   
-   **On Windows:**
-   ```bash
-   venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Running the Application
-
-1. **Start the Streamlit app:**
-   ```bash
-   streamlit run app.py
-   ```
-
-2. **The app will open in your default browser at:**
-   ```
-   http://localhost:8501
-   ```
-
-3. **To stop the server:** Press `Ctrl+C` in the terminal
-
-### Enable Direct Message Email Delivery
-
-The contact form can send messages directly to your inbox via SMTP. Configure the following environment variables before running `streamlit run app.py` (create a `.env` file or set them in your shell/user environment):
-
-| Variable | Description |
-| --- | --- |
-| `PORTFOLIO_SMTP_HOST` | SMTP server hostname (e.g., `smtp.gmail.com`) |
-| `PORTFOLIO_SMTP_PORT` | SMTP port, usually `587` for TLS |
-| `PORTFOLIO_SMTP_USERNAME` | SMTP account username/login |
-| `PORTFOLIO_SMTP_PASSWORD` | SMTP account password or app-specific password |
-| `PORTFOLIO_SMTP_SENDER` *(optional)* | Email address used in the **From** header (defaults to the username) |
-| `PORTFOLIO_CONTACT_RECIPIENT` | Destination email address for incoming messages |
-
-Once these are set, the "Direct Message" form on the Contact page will email you every submission. If the variables are missing, the form stays visible but shows an info banner indicating email delivery is disabled.
-
-## 🎨 Customization Guide
-
-### Changing Colors
-Edit the CSS in `app.py` (main file), look for the style section:
-```python
---accent-color: #00d4ff;  # Change this hex code for accent color
---primary-color: #1f1f1f; # Change this for primary color
---text-color: #e0e0e0;    # Change this for text color
-```
-
-### Adding New Skills
-In `portfolio_pages/skills.py`, add new skills to the `skills_data` dictionary:
-```python
-skills_data = {
-    "New Category": ["Skill1", "Skill2", "Skill3"]
-}
-```
-
-### Adding New Projects
-In `portfolio_pages/projects.py`, duplicate the project card section and update with your new project details.
-
-### Updating Contact Information
-Edit the contact links in:
-- `app.py` (sidebar info)
-- `portfolio_pages/home.py` (home page links)
-- `portfolio_pages/contact.py` (contact page)
-
-### Changing Personal Information
-Update your name and details in:
-- `app.py` (page title and sidebar)
-- `portfolio_pages/home.py` (introduction and education)
-
-## 📦 Dependencies
-
-- **streamlit**: Web application framework
-- No other external dependencies required
-
-## 🔧 Development Tips
-
-1. **Hot Reload**: Streamlit automatically reloads when you save changes
-2. **Debug Mode**: Add `print()` statements to debug; they appear in the terminal
-3. **Local Testing**: Always test locally before deployment
-
-## 🌐 Deployment Options
-
-### Streamlit Cloud (Recommended)
-1. Push your code to GitHub
-2. Go to https://streamlit.io/cloud
-3. Connect your GitHub repository
-4. Click "Deploy"
-
-### Other Platforms
-- **Heroku** (with Procfile)
-- **AWS** (with Lambda)
-- **Azure** (with App Service)
-- **PythonAnywhere** (simple hosting)
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 👤 Author
-
-**Uttaran Ganguly**
-- Email: uttaranganguly20@gmail.com
-- GitHub: https://github.com/uttaranganguly567
-- LinkedIn: https://www.linkedin.com/in/uttaran-ganguly/
+Live Demo: `http://localhost:5174/` (Local Vite Dev Server)
 
 ---
 
-**Last Updated:** November 25, 2025
+## ⚡ Highlights & Key Sections
 
-For questions or suggestions, feel free to reach out!
+1. **Cybernetic Fluid Cursor & Interactive Particle Canvas**:
+   - Custom bioluminescent cursor with physics-based spring follower orb and click ripple burst.
+   - Interactive HTML5 canvas with node constellation and mouse repulsion physics.
+2. **Founder & Agency Section — LightShift Studio**:
+   - Founded in November 2025 by Uttaran Ganguly.
+   - Highlights the 30% performance partnership model, product-led growth, client code sovereignty, and enterprise AI retainers.
+   - Direct link to `https://light-shift.studio`.
+3. **Curated & Filterable Projects**:
+   - **Agency / Freelance Flagships (under LightShift Studio)**:
+     - **HyperVerse** (`https://hyperverse.fit`): Biomechanical coaching with Google Gemini Multimodal AI, Meal Vision, 9-language bidirectional translation, 12 pages, Whop webhooks, and automated daily email crons.
+     - **Legacy Club** (`https://mylegacyclub.store`): E-commerce card wraps with real-time 3D card customizer, headless Notion database sync, and server-verified Razorpay checkout.
+   - **Academic & AI Research Projects**:
+     - **Convo Capsule (MoM Generator)** (`https://github.com/Rsah21/MoM-Generator`): Final year 4-member research project with a 9-stage pipeline featuring OpenAI Whisper (90+ languages), SpeechBrain ECAPA-TDNN acoustic diarization, biometric voiceprint matching (60% cosine similarity), NLP disfluency cleaning, entity extraction, and hierarchical BART abstractive summarization.
+     - **Campus Core** (`https://campus-core.onrender.com/login`): 5th semester 3-member project with FastAPI asynchronous backend, PBKDF2/JWT RBAC, and an AI Academic Risk Index predictive health scoring algorithm.
+4. **Interactive Architecture Deep-Dive Modal**:
+   - Comprehensive multi-stage pipeline walkthroughs, engineering trade-offs, and technical tables.
+5. **Technical Arsenal (Tailored for AI/ML Recruiters)**:
+   - Deep Learning & Speech NLP (Whisper, SpeechBrain, Gemini Multimodal, BART, Flan-T5, PyTorch, ROUGE benchmarks).
+   - High-throughput Asynchronous Backend (FastAPI, React 18, Vite, Spring Boot, HTMX).
+   - Cloud, Databases & DevOps (MongoDB Atlas, SQLite, SQLAlchemy, Docker, Vercel Serverless, Render).
+6. **Direct Communication & Instant Clipboard Copy**:
+   - One-click copy email button, interactive feedback toasts, and direct links to LinkedIn, GitHub, and email.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+) & npm
+
+### Development
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server (port 5174)
+npm run dev
+```
+
+Open `http://localhost:5174/` in your browser.
+
+### Production Build
+```bash
+npm run build
+```
+Creates an optimized, minified static bundle in `dist/` ready to deploy to Vercel, Netlify, Cloudflare Pages, or GitHub Pages.
+
+---
+
+## 📁 Directory Structure
+```
+Student/
+├── index.html         # Semantic HTML5 layout and modal dialogs
+├── style.css          # Design system, glassmorphism, cursor & animation styles
+├── main.js            # Core JS (custom cursor, particle canvas, filters, modal)
+├── package.json       # Vite build & dev scripts
+├── README.md          # Documentation
+└── dist/              # Production build output (generated on build)
+```
