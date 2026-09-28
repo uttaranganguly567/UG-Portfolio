@@ -2684,3 +2684,107 @@ main {
   }
 }
 
+/* ==========================================================================
+   ADVANCED UI/UX MOTION: KINETIC MASKING, CLICK RIPPLE & PARALLAX LAYERS
+   ========================================================================== */
+
+/* 1. Kinetic Headline Masking (Text Slide-Up Clip Reveals) */
+.title-mask-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1.15;
+}
+
+.mask-line-inner {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.75s ease;
+  will-change: transform, opacity;
+}
+
+/* Revealed state */
+.revealed .mask-line-inner,
+.reveal-on-scroll.revealed .mask-line-inner {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+/* Exit states */
+.reveal-on-scroll.exit-up .mask-line-inner {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+.reveal-on-scroll.exit-down .mask-line-inner {
+  transform: translateY(115%);
+  opacity: 0;
+}
+
+/* Stagger lines inside multi-line titles */
+.title-mask-wrap:nth-child(1) .mask-line-inner { transition-delay: 0.04s; }
+.title-mask-wrap:nth-child(2) .mask-line-inner { transition-delay: 0.16s; }
+.title-mask-wrap:nth-child(3) .mask-line-inner { transition-delay: 0.28s; }
+
+/* 6. Cybernetic Click Shockwave / Ripple Effect */
+.cyber-click-ripple {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--neon-cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999990;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: cyberRippleExpand 0.55s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.7), inset 0 0 10px rgba(0, 255, 170, 0.4);
+}
+
+.cyber-click-flash {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999991;
+  transform: translate(-50%, -50%);
+  animation: cyberFlashBurst 0.35s ease-out forwards;
+  box-shadow: 0 0 12px #ffffff, 0 0 24px var(--neon-cyan);
+}
+
+@keyframes cyberRippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1;
+  }
+  65% {
+    border-color: var(--neon-emerald);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0;
+  }
+}
+
+@keyframes cyberFlashBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* 7. Multi-Layer Parallax Content Layering */
+[data-parallax] {
+  transition: transform 0.08s linear;
+  will-change: transform;
+}
+
+

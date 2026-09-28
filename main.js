@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveals();
   initNumberCounters();
   initScrollToTopHUD();
+  initCyberClickRipple();
+  initMultiLayerParallax();
   initContactUtilities();
 });
 
@@ -775,4 +777,73 @@ function initScrollToTopHUD() {
     });
   });
 }
+
+/* ==========================================================================
+   9. CYBERNETIC CLICK SHOCKWAVE / RIPPLE EFFECT
+   ========================================================================== */
+function initCyberClickRipple() {
+  window.addEventListener('pointerdown', (e) => {
+    // Avoid triggering on scrollbar drag at the edge
+    if (e.clientX >= window.innerWidth - 12) return;
+
+    const ripple = document.createElement('div');
+    ripple.className = 'cyber-click-ripple';
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+
+    const flash = document.createElement('div');
+    flash.className = 'cyber-click-flash';
+    flash.style.left = `${e.clientX}px`;
+    flash.style.top = `${e.clientY}px`;
+
+    document.body.appendChild(ripple);
+    document.body.appendChild(flash);
+
+    setTimeout(() => {
+      ripple.remove();
+      flash.remove();
+    }, 580);
+  });
+}
+
+/* ==========================================================================
+   10. MULTI-LAYER CONTENT PARALLAX DEPTH
+   ========================================================================== */
+function initMultiLayerParallax() {
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isReducedMotion) return;
+
+  const parallaxItems = document.querySelectorAll('[data-parallax]');
+  if (!parallaxItems.length) return;
+
+  let ticking = false;
+
+  const updateParallax = () => {
+    const vh = window.innerHeight;
+
+    parallaxItems.forEach((el) => {
+      const speed = parseFloat(el.getAttribute('data-parallax')) || 0.05;
+      const rect = el.getBoundingClientRect();
+
+      // Only calculate if near or inside viewport
+      if (rect.bottom >= -150 && rect.top <= vh + 150) {
+        const centerOffset = rect.top + rect.height / 2 - vh / 2;
+        const translateY = centerOffset * speed * -1;
+        el.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
+      }
+    });
+
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateParallax();
+}
+
 
