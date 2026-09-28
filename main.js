@@ -633,40 +633,74 @@ function showToast(message) {
 }
 
 /* ==========================================================================
-   6. SCROLL-TRIGGERED REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+   6. BIDIRECTIONAL SCROLL-TRIGGERED REVEAL & EXIT ANIMATIONS
    ========================================================================== */
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if (!revealElements.length) return;
 
-  // Immediately reveal elements already near or inside viewport
-  const revealIfVisible = (el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+  const isHeroChild = (el) => el.closest('#hero') !== null;
+
+  const handleEntry = (entry) => {
+    const el = entry.target;
+    const rect = entry.boundingClientRect;
+
+    if (entry.isIntersecting) {
       el.classList.add('revealed');
+      el.classList.remove('exit-up', 'exit-down');
+    } else {
+      // Keep hero visible when user is near the very top of the page
+      if (window.scrollY < 120 && isHeroChild(el)) {
+        el.classList.add('revealed');
+        el.classList.remove('exit-up', 'exit-down');
+        return;
+      }
+
+      if (rect.bottom < 0) {
+        // Scrolled past top of viewport
+        el.classList.remove('revealed');
+        el.classList.add('exit-up');
+        el.classList.remove('exit-down');
+      } else if (rect.top > window.innerHeight) {
+        // Scrolled below bottom of viewport
+        el.classList.remove('revealed');
+        el.classList.add('exit-down');
+        el.classList.remove('exit-up');
+      }
     }
   };
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          obs.unobserve(entry.target);
-        }
-      });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(handleEntry);
     }, {
       root: null,
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: [0, 0.08, 0.18],
+      rootMargin: '10px 0px 10px 0px'
     });
 
     revealElements.forEach((el) => {
-      revealIfVisible(el);
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+        el.classList.add('revealed');
+      } else if (rect.bottom <= 0) {
+        el.classList.add('exit-up');
+      } else {
+        el.classList.add('exit-down');
+      }
       observer.observe(el);
     });
+
+    // Top scroll safeguard to ensure hero elements remain crisp when at top
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 80) {
+        document.querySelectorAll('#hero .reveal-on-scroll').forEach((el) => {
+          el.classList.add('revealed');
+          el.classList.remove('exit-up', 'exit-down');
+        });
+      }
+    }, { passive: true });
   } else {
-    // Fallback for older browsers
     revealElements.forEach((el) => el.classList.add('revealed'));
   }
 }
