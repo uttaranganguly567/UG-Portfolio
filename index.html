@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Top Cybernetic Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+
   <!-- Custom Cybernetic Cursor (Animated & Themed) -->
   <div class="cyber-cursor-dot" id="cursor-dot"></div>
   <div class="cyber-cursor-ring" id="cursor-ring"></div>
@@ -96,13 +99,13 @@
       <div class="container hero-symmetric-container">
         
         <!-- Status Pill -->
-        <div class="hero-center-badge">
+        <div class="hero-center-badge reveal-on-scroll">
           <span class="badge-dot-live"></span>
           <span>FOUNDER @ LIGHTSHIFT STUDIO · AI SYSTEMS & SOFTWARE ARCHITECT</span>
         </div>
 
         <!-- Monumental Centered Headline with Luminous Core Animation -->
-        <div class="hero-headline-wrap">
+        <div class="hero-headline-wrap reveal-on-scroll">
           <div class="hero-glow-core"></div>
           <h1 class="hero-monumental-title">
             <span class="hero-title-row">BUILDING INTELLIGENT</span>
@@ -111,19 +114,19 @@
         </div>
 
         <!-- Symmetrical Lead Paragraph -->
-        <p class="hero-symmetric-lead">
+        <p class="hero-symmetric-lead reveal-on-scroll">
           I am <strong>Uttaran Ganguly</strong> — software engineer, AI pipeline architect, and founder of <strong>LightShift Studio</strong>. I design autonomous speech pipelines, multimodal vision integrations, and resilient web platforms that bridge machine learning computation with commercial execution.
         </p>
 
         <!-- Mobile Dynamic Highlights Bar -->
-        <div class="hero-quick-chips">
+        <div class="hero-quick-chips reveal-on-scroll">
           <span class="quick-chip">⚡ LightShift Studio Founder</span>
           <span class="quick-chip">🎙️ Whisper & Speech AI</span>
           <span class="quick-chip">📈 30% PLG RevShare</span>
         </div>
 
         <!-- Symmetrical Hero Launchpad Actions -->
-        <div class="hero-symmetric-actions">
+        <div class="hero-symmetric-actions reveal-on-scroll">
           <a href="#systems" class="btn-symmetric btn-cyan">
             <span>Explore Featured Systems</span>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
@@ -183,11 +186,64 @@
       </div>
     </div>
 
+    <!-- HIGH-VELOCITY METRICS HUD (ANIMATED ROLL COUNTERS ON SCROLL) -->
+    <section class="metrics-band-section reveal-on-scroll" id="metrics">
+      <div class="container">
+        <div class="metrics-hud-grid reveal-stagger">
+          
+          <div class="metric-hud-card">
+            <div class="metric-hud-header">
+              <span class="metric-hud-dot emerald"></span>
+              <span class="metric-hud-label">LIGHTSHIFT MODEL</span>
+            </div>
+            <div class="metric-hud-val-wrap">
+              <span class="metric-hud-val" data-target="30" data-suffix="%">0%</span>
+            </div>
+            <span class="metric-hud-sub">RevShare Performance Partnership</span>
+          </div>
+
+          <div class="metric-hud-card">
+            <div class="metric-hud-header">
+              <span class="metric-hud-dot cyan"></span>
+              <span class="metric-hud-label">SPEECH PIPELINE</span>
+            </div>
+            <div class="metric-hud-val-wrap">
+              <span class="metric-hud-val" data-target="90" data-suffix="+">0+</span>
+            </div>
+            <span class="metric-hud-sub">Multilingual Whisper Recognition</span>
+          </div>
+
+          <div class="metric-hud-card">
+            <div class="metric-hud-header">
+              <span class="metric-hud-dot purple"></span>
+              <span class="metric-hud-label">AUTONOMOUS FLOW</span>
+            </div>
+            <div class="metric-hud-val-wrap">
+              <span class="metric-hud-val" data-target="9" data-suffix="-Stage">0-Stage</span>
+            </div>
+            <span class="metric-hud-sub">Convo Capsule Speech-to-Doc</span>
+          </div>
+
+          <div class="metric-hud-card">
+            <div class="metric-hud-header">
+              <span class="metric-hud-dot gold"></span>
+              <span class="metric-hud-label">CLIENT SOVEREIGNTY</span>
+            </div>
+            <div class="metric-hud-val-wrap">
+              <span class="metric-hud-val" data-target="100" data-suffix="%">0%</span>
+            </div>
+            <span class="metric-hud-sub">Direct Git & Cloud Infrastructure</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- AGENCY SECTION: LIGHTSHIFT STUDIO (SYMMETRICAL 2X2 GRID) -->
     <section class="section agency-section" id="agency">
       <div class="container">
         
-        <div class="section-center-head">
+        <div class="section-center-head reveal-on-scroll">
           <div class="section-tag-badge">
             <span class="badge-dot emerald"></span>
             <span>FOUNDED NOVEMBER 2025 BY UTTARAN GANGULY</span>
@@ -203,7 +259,7 @@
         </div>
 
         <!-- Symmetrical 2x2 Agency Grid -->
-        <div class="agency-sym-grid">
+        <div class="agency-sym-grid reveal-on-scroll reveal-stagger">
           
           <div class="sym-card glow-cyan-hover">
             <div class="sym-card-badge">FLAGSHIP BUSINESS MODEL</div>
@@ -260,7 +316,7 @@
         </div>
 
         <!-- Studio Symmetrical CTA Banner -->
-        <div class="agency-banner-sym">
+        <div class="agency-banner-sym reveal-on-scroll">
           <div class="banner-center-text">
             <span class="banner-tag">OFFICIAL PRODUCTION HUB</span>
             <h3 class="banner-heading">Experience LightShift Studio Live</h3>
@@ -279,7 +335,7 @@
     <section class="section systems-section" id="systems">
       <div class="container">
         
-        <div class="section-center-head">
+        <div class="section-center-head reveal-on-scroll">
           <div class="section-tag-badge">
             <span class="badge-dot cyan"></span>
             <span>PRODUCTION FLAGSHIPS & ADVANCED R&D</span>
@@ -293,7 +349,7 @@
         </div>
 
         <!-- Category Filter Tabs -->
-        <div class="filter-tabs-sym">
+        <div class="filter-tabs-sym reveal-on-scroll">
           <button class="sys-filter-tab active" data-filter="all">
             <span>All Systems</span>
             <span class="tab-count">4</span>
@@ -309,7 +365,7 @@
         </div>
 
         <!-- Symmetrical 2-Column Systems Grid -->
-        <div class="systems-sym-grid">
+        <div class="systems-sym-grid reveal-on-scroll reveal-stagger">
 
           <!-- 1. HYPERVERSE -->
           <article class="system-item-card" data-category="agency">
@@ -547,7 +603,7 @@
     <section class="section arsenal-section" id="arsenal">
       <div class="container">
         
-        <div class="section-center-head">
+        <div class="section-center-head reveal-on-scroll">
           <div class="section-tag-badge">
             <span class="badge-dot purple"></span>
             <span>CAPABILITIES & ARCHITECTURE STACK</span>
@@ -560,7 +616,7 @@
           </p>
         </div>
 
-        <div class="arsenal-sym-grid">
+        <div class="arsenal-sym-grid reveal-on-scroll reveal-stagger">
           
           <!-- Card 1: AI & Applied ML (Verified skills only) -->
           <div class="arsenal-sym-card">
@@ -637,7 +693,7 @@
     <section class="section profile-section" id="profile">
       <div class="container">
         
-        <div class="profile-sym-card">
+        <div class="profile-sym-card reveal-on-scroll">
           <div class="profile-layout-grid">
             
             <!-- Left: Profile Photo & Social Links -->
@@ -702,7 +758,7 @@
     <section class="section contact-section" id="contact">
       <div class="container">
         
-        <div class="section-center-head">
+        <div class="section-center-head reveal-on-scroll">
           <div class="section-tag-badge">
             <span class="badge-dot cyan"></span>
             <span>GET IN TOUCH</span>
@@ -715,7 +771,7 @@
           </p>
         </div>
 
-        <div class="contact-sym-grid">
+        <div class="contact-sym-grid reveal-on-scroll reveal-stagger">
           
           <!-- Left: Direct Channels -->
           <div class="contact-sym-box">
@@ -823,6 +879,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating Cybernetic Scroll-to-Top HUD Button -->
+  <button class="hud-scroll-top" id="hud-scroll-top" aria-label="Scroll back to top">
+    <span class="hud-top-glow"></span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+    <span class="hud-top-text">TOP</span>
+  </button>
 
   <!-- ARCHITECTURE DEEP DIVE MODAL -->
   <div class="modal-overlay" id="arch-modal-overlay">

@@ -2393,3 +2393,280 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   SCROLL ANIMATIONS & ADVANCED UI/UX ENHANCEMENTS
+   ========================================================================== */
+
+/* 1. Top Cybernetic Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald), var(--neon-purple));
+  z-index: 9999999;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 255, 170, 0.5);
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* 2. Scroll-Driven Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  filter: blur(3px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.65s ease;
+  will-change: opacity, transform, filter;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Sequential Stagger Delays for Grid Children */
+.reveal-stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 0.13s; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 0.21s; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 0.29s; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 0.37s; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 0.45s; }
+
+/* 3. High-Velocity Metrics HUD Band */
+.metrics-band-section {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 0 2.5rem;
+  background: linear-gradient(180deg, rgba(3, 5, 9, 0.95) 0%, rgba(6, 10, 18, 0.98) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.metrics-hud-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.metric-hud-card {
+  background: rgba(9, 13, 22, 0.82);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.35rem;
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-hud-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.metric-hud-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.12);
+}
+
+.metric-hud-card:hover::before {
+  opacity: 1;
+}
+
+.metric-hud-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.metric-hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.metric-hud-dot.emerald { background: var(--neon-emerald); box-shadow: 0 0 8px var(--neon-emerald); }
+.metric-hud-dot.cyan { background: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
+.metric-hud-dot.purple { background: var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); }
+.metric-hud-dot.gold { background: var(--neon-gold); box-shadow: 0 0 8px var(--neon-gold); }
+
+.metric-hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.metric-hud-val-wrap {
+  margin-bottom: 0.4rem;
+}
+
+.metric-hud-val {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 40%, var(--neon-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-hud-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+/* 4. 3D Gyroscopic Card Tilt & Interactive Light Glare Physics */
+@media (hover: hover) and (pointer: fine) {
+  .sym-card, .system-item-card, .arsenal-sym-card, .metric-hud-card {
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    will-change: transform;
+  }
+  
+  .sym-card:hover, .system-item-card:hover, .arsenal-sym-card:hover {
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.15);
+  }
+}
+
+/* 5. Floating Cybernetic Scroll-to-Top HUD Button */
+.hud-scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2.2rem;
+  width: 48px;
+  height: 48px;
+  background: rgba(8, 12, 22, 0.88);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  border-radius: 50%;
+  color: var(--neon-cyan);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 240, 255, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.9);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              background 0.2s ease;
+}
+
+.hud-scroll-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.hud-scroll-top:hover {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 28px rgba(0, 240, 255, 0.55);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.hud-scroll-top svg {
+  transition: transform 0.2s ease;
+}
+
+.hud-scroll-top:hover svg {
+  transform: translateY(-2px);
+}
+
+.hud-top-text {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-top: -2px;
+  line-height: 1;
+}
+
+/* Micro-Interactions on Tag Pills */
+.sym-pill:hover, .sys-tag:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.sym-pill, .sys-tag {
+  transition: all var(--transition-fast);
+}
+
+/* Tablet & Mobile Breakpoints for New Enhancements */
+@media (max-width: 1024px) {
+  .metrics-hud-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-band-section {
+    padding: 2.2rem 0 1.8rem;
+  }
+
+  .metrics-hud-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+  }
+
+  .metric-hud-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .metric-hud-val {
+    font-size: 1.85rem;
+  }
+
+  .metric-hud-sub {
+    font-size: 0.74rem;
+  }
+
+  /* Offset HUD back-to-top button on mobile to stay above the dock */
+  .hud-scroll-top {
+    bottom: 5.6rem;
+    right: 1.25rem;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-hud-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+

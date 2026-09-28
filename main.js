@@ -7,10 +7,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   initDeviceAdaptation();
   initCyberCursor();
-  initSpotlightBorders();
+  initCardPhysicsAndSpotlight();
   initSystemFilters();
   initArchitectureModal();
   initNavigationScrollSpy();
+  initScrollReveals();
+  initNumberCounters();
+  initScrollToTopHUD();
   initContactUtilities();
 });
 
@@ -115,10 +118,11 @@ function initCyberCursor() {
 }
 
 /* ==========================================================================
-   1. SPOTLIGHT CARD BORDERS (MOUSE TRACKING GLOW)
+   1. CARD PHYSICS: SPOTLIGHT RADIAL GLOW & 3D GYROSCOPIC TILT
    ========================================================================== */
-function initSpotlightBorders() {
-  const cards = document.querySelectorAll('.sym-card, .system-item-card, .arsenal-sym-card');
+function initCardPhysicsAndSpotlight() {
+  const cards = document.querySelectorAll('.sym-card, .system-item-card, .arsenal-sym-card, .metric-hud-card');
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
   cards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
@@ -126,8 +130,25 @@ function initSpotlightBorders() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
+      // Update spotlight radial glow position
       card.style.setProperty('--mouse-x', `${x}px`);
       card.style.setProperty('--mouse-y', `${y}px`);
+
+      // On fine-pointer desktop, add subtle 3D gyroscopic tilt
+      if (!isTouch) {
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5; // max 5deg
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(6px)`;
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (!isTouch) {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      }
     });
   });
 }
@@ -448,15 +469,48 @@ function initNavigationScrollSpy() {
   const mobileToggle = document.getElementById('mobile-menu-btn');
   const navMenu = document.getElementById('nav-menu');
 
+  const progressBar = document.getElementById('scroll-progress');
+  const scrollTopBtn = document.getElementById('hud-scroll-top');
+  const orbCyan = document.querySelector('.orb-cyan');
+  const orbPurple = document.querySelector('.orb-purple');
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+    const scrollY = window.scrollY;
+
+    // 1. Navbar Glassmorph Scrolled State
+    if (scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
 
+    // 2. Top Scroll Progress Indicator Bar
+    if (progressBar) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // 3. Floating Back-to-Top HUD Button Visibility
+    if (scrollTopBtn) {
+      if (scrollY > 380) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 4. Subtle Parallax for Ambient Glowing Orbs
+    if (orbCyan) {
+      orbCyan.style.transform = `translate3d(0, ${scrollY * -0.06}px, 0)`;
+    }
+    if (orbPurple) {
+      orbPurple.style.transform = `translate3d(0, ${scrollY * 0.05}px, 0)`;
+    }
+
+    // 5. Active Section Scroll-Spy
     let currentId = '';
-    const scrollPos = window.scrollY + 200;
+    const scrollPos = scrollY + 220;
 
     sections.forEach((sec) => {
       const top = sec.offsetTop;
@@ -481,7 +535,7 @@ function initNavigationScrollSpy() {
         dock.classList.add('active');
       }
     });
-  });
+  }, { passive: true });
 
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', (e) => {
@@ -577,3 +631,114 @@ function showToast(message) {
     setTimeout(() => toast.remove(), 350);
   }, 3500);
 }
+
+/* ==========================================================================
+   6. SCROLL-TRIGGERED REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+   ========================================================================== */
+function initScrollReveals() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if (!revealElements.length) return;
+
+  // Immediately reveal elements already near or inside viewport
+  const revealIfVisible = (el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+      el.classList.add('revealed');
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach((el) => {
+      revealIfVisible(el);
+      observer.observe(el);
+    });
+  } else {
+    // Fallback for older browsers
+    revealElements.forEach((el) => el.classList.add('revealed'));
+  }
+}
+
+/* ==========================================================================
+   7. HIGH-VELOCITY NUMBER COUNTERS (ROLL ANIMATION ON SCROLL)
+   ========================================================================== */
+function initNumberCounters() {
+  const metricValues = document.querySelectorAll('.metric-hud-val');
+  if (!metricValues.length) return;
+
+  let hasAnimated = false;
+  const metricsSection = document.getElementById('metrics');
+
+  const startCounters = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
+
+    metricValues.forEach((el) => {
+      const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1500;
+      const startTime = performance.now();
+
+      const updateCount = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Exponential ease-out
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const current = Math.floor(ease * target);
+
+        el.textContent = `${current}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        } else {
+          el.textContent = `${target}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(updateCount);
+    });
+  };
+
+  if (metricsSection && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          startCounters();
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(metricsSection);
+  } else {
+    setTimeout(startCounters, 600);
+  }
+}
+
+/* ==========================================================================
+   8. SCROLL-TO-TOP FLOATING HUD BUTTON
+   ========================================================================== */
+function initScrollToTopHUD() {
+  const btn = document.getElementById('hud-scroll-top');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
